@@ -4,8 +4,9 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 from tqdm.notebook import tqdm
-from config import LEARNING_RATE, LR_STEP_SIZE, LR_GAMMA, MAX_EPOCHS
-from utils import pair_downsample
+
+from .config import LEARNING_RATE, LR_STEP_SIZE, LR_GAMMA, MAX_EPOCHS
+from .utils import pair_downsample
 
 def calculate_loss(noisy_image, model):
     """

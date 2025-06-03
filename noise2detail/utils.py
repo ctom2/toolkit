@@ -2,7 +2,7 @@
 
 import torch
 import torch.nn.functional as F
-from config import NOISE_TYPE, NOISE_LEVEL
+from .config import NOISE_TYPE, NOISE_LEVEL
 
 def add_noise(image, noise_level=NOISE_LEVEL):
     """

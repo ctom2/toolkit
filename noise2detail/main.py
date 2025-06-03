@@ -4,11 +4,12 @@ import torch
 import numpy as np
 from PIL import Image
 import skimage
-from model import DenoisingNetwork
-from utils import add_noise, pixel_unshuffle, pixel_shuffle
-from train import train_model, train_model_2
-from evaluate import evaluate_results, plot_results
-from config import DEVICE, CHAN_EMBED, MAX_EPOCHS
+
+from .model import DenoisingNetwork
+from .utils import add_noise, pixel_unshuffle, pixel_shuffle
+from .train import train_model, train_model_2
+from .evaluate import evaluate_results, plot_results
+from .config import DEVICE, CHAN_EMBED, MAX_EPOCHS
 
 def main():
     # Load and preprocess image
