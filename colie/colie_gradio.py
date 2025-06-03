@@ -1,7 +1,7 @@
-from utils import *
-from loss import *
-from siren import INF
-from color import rgb2hsv_torch, hsv2rgb_torch
+from .utils import *
+from .loss import *
+from .siren import INF
+from .color import rgb2hsv_torch, hsv2rgb_torch
 
 def colie_run(img_rgb, beta, gamma, delta, L, alpha=1, epochs=100, down_size=256, window=1):
     img_hsv = rgb2hsv_torch(img_rgb)

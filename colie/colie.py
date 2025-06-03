@@ -1,7 +1,7 @@
-from utils import *
-from loss import *
-from siren import INF
-from color import rgb2hsv_torch, hsv2rgb_torch
+from .utils import *
+from .loss import *
+from .siren import INF
+from .color import rgb2hsv_torch, hsv2rgb_torch
 
 import os
 import argparse
