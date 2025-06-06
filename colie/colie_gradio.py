@@ -3,7 +3,28 @@ from .loss import *
 from .siren import INF
 from .color import rgb2hsv_torch, hsv2rgb_torch
 
-def colie_run(img_rgb, beta, gamma, delta, L, alpha=1, epochs=100, down_size=256, window=1):
+
+def input_image_logic(img):
+    """
+    Reads a grayscale image as numpy array and prepares it for CoLIE processing.
+    """
+    img = img / np.max(img)
+    # creates three channel version of the image (required for CoLIE)
+    input_image = torch.from_numpy(img).unsqueeze(0).repeat(3, 1, 1).unsqueeze(0).float().cuda()
+    return input_image
+
+
+def output_image_logic(img):
+    """
+    Receives the CoLIE output and prepares it for saving and Gradio vizualisation.
+    """
+    restored_img = img.squeeze(0).mean(dim=0).detach().cpu().numpy()
+    return restored_img
+
+
+def colie_run(img, beta, gamma, delta, L, alpha=1, epochs=100, down_size=256, window=1):
+    img_rgb = input_image_logic(img)
+
     img_hsv = rgb2hsv_torch(img_rgb)
 
     img_v = get_v_component(img_hsv)
@@ -46,4 +67,4 @@ def colie_run(img_rgb, beta, gamma, delta, L, alpha=1, epochs=100, down_size=256
     img_rgb_fixed = hsv2rgb_torch(img_hsv_fixed)
     img_rgb_fixed = img_rgb_fixed / torch.max(img_rgb_fixed)
 
-    return img_rgb_fixed
+    return output_image_logic(img_rgb_fixed)
