@@ -25,6 +25,6 @@ def lucyd2d_run(noisy_img, weights):
     model.eval()
 
     with torch.no_grad():
-        out = model(noisy_img)
+        out, _, _ = model(noisy_img)
 
     return output_image_logic(out)
