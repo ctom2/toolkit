@@ -14,7 +14,7 @@ def output_image_logic(img):
     return restored_img
 
 
-def lucyd3d_run(noisy_img, weights):
+def lucyd2d_run(noisy_img, weights):
 
     WEIGHT = os.path.join(os.path.dirname(__file__), weights)
 
