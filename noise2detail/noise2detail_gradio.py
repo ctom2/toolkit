@@ -11,7 +11,21 @@ from .train import train_model, train_model_2
 from .evaluate import evaluate_results, plot_results
 from .config import DEVICE, CHAN_EMBED, MAX_EPOCHS
 
+
+def input_image_logic(img):
+    img = img / np.max(img)
+    input_image = torch.from_numpy(img).unsqueeze(0).unsqueeze(0).float().cuda()
+    return input_image
+
+
+def output_image_logic(img):
+    restored_img = img.squeeze(0).squeeze(0).detach().cpu().numpy()
+    return restored_img
+
+
 def noise2detail_run(noisy_img):
+    noisy_img = input_image_logic(noisy_img)
+
     # Stage 1: Initial denoising
     model = DenoisingNetwork(noisy_img.shape[1], CHAN_EMBED).to(DEVICE)
     train_model(model, noisy_img)
@@ -40,4 +54,4 @@ def noise2detail_run(noisy_img):
     with torch.no_grad():
         denoised_img_3 = torch.clamp(model2(denoised_img_2), 0, 1)
 
-    return denoised_img_3
+    return output_image_logic(denoised_img_3)
