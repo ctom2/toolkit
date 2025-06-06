@@ -11,6 +11,7 @@ def input_image_logic(img):
 
 def output_image_logic(img):
     restored_img = img.squeeze(0).squeeze(0).detach().cpu().numpy()
+    restored_img = restored_img / np.max(restored_img)
     return restored_img
 
 
