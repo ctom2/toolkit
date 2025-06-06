@@ -16,6 +16,8 @@ def output_image_logic(img):
 
 def lucyd3d_run(noisy_img, weights):
 
+    noisy_img = input_image_logic(noisy_img)
+
     WEIGHT = os.path.join(os.path.dirname(__file__), weights)
 
     model = LUCYD().cuda()
